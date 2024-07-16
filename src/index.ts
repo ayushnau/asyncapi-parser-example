@@ -1,16 +1,15 @@
-import { Parser, fromURL, Diagnostic } from '@asyncapi/parser';
+import { Parser, Diagnostic, fromFile } from '@asyncapi/parser';
 
 const parser = new Parser();
 function prettyPrint(diagnostics: Diagnostic[]) {
     for (const diagnostic of diagnostics) {
-        console.log(diagnostic.severity, diagnostic.message);
+        console.log(diagnostic);
     }
 }
 
 const parse = async () => {
-    const { diagnostics } = await fromURL(parser, 'https://raw.githubusercontent.com/asyncapi/spec/master/examples/simple.yml').parse();
+    const { diagnostics } = await fromFile(parser, 'asyncapi.yaml').parse();
     prettyPrint(diagnostics);
-    
 };
 
 parse();
