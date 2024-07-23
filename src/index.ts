@@ -1,15 +1,9 @@
-import { Parser, Diagnostic, fromFile } from '@asyncapi/parser';
+import { NewParser } from '@asyncapi/multi-parser';
 
-const parser = new Parser();
-function prettyPrint(diagnostics: Diagnostic[]) {
-    for (const diagnostic of diagnostics) {
-        console.log(diagnostic);
-    }
-}
-
+const parser = NewParser();
 const parse = async () => {
-    const { diagnostics } = await fromFile(parser, 'asyncapi.yaml').parse();
-    prettyPrint(diagnostics);
+    const {diagnostics} = await parser.parse('');
+    console.log(diagnostics);
 };
 
 parse();
